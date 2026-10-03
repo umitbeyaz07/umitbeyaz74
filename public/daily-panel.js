@@ -1,0 +1,17 @@
+(() => {
+  const panel=document.getElementById('dailyPanel'); if(!panel)return;
+  const $=id=>document.getElementById(id);
+  const clock=()=>{const now=new Date();$('dailyClock').textContent=now.toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit',second:'2-digit'});$('dailyDate').textContent=now.toLocaleDateString('tr-TR',{timeZone:'Europe/Istanbul',weekday:'long',day:'numeric',month:'long',year:'numeric'});};
+  clock();setInterval(clock,1000);
+  const cities=[['İstanbul',41.01,28.97],['Ankara',39.93,32.86],['İzmir',38.42,27.14],['Bursa',40.20,29.06],['Antalya',36.90,30.71],['Adana',37,35.32],['Konya',37.87,32.48],['Gaziantep',37.07,37.38],['Trabzon',41,39.72],['Samsun',41.29,36.33],['Diyarbakır',37.91,40.24],['Erzurum',39.9,41.27],['Eskişehir',39.78,30.52],['Kayseri',38.72,35.48],['Mersin',36.8,34.63],['Sakarya',40.77,30.4]];
+  for(const [name] of cities){const o=document.createElement('option');o.value=name;o.textContent=name;$('weatherCity').append(o)}
+  try{$('weatherCity').value=localStorage.getItem('cevre-weather-city')||'İstanbul'}catch{}
+  if(!$('weatherCity').value)$('weatherCity').value='İstanbul';
+  let weatherRun=0;
+  const desc=c=>c===0?'☀️ Açık':c<=3?'⛅ Parçalı bulutlu':[45,48].includes(c)?'🌫️ Sisli':[71,73,75,77,85,86].includes(c)?'❄️ Karlı':c>=95?'⛈️ Gök gürültülü':'🌧️ Yağışlı';
+  async function weather(){const run=++weatherRun;const city=cities.find(c=>c[0]===$('weatherCity').value);$('weatherValue').textContent='Yükleniyor…';try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+city[1]+'&longitude='+city[2]+'&current=temperature_2m,apparent_temperature,weather_code&timezone=Europe%2FIstanbul',{signal:AbortSignal.timeout(10000)});if(!r.ok)throw Error();const d=await r.json();if(run!==weatherRun)return;if(!Number.isFinite(d.current?.temperature_2m))throw Error();$('weatherValue').textContent=Math.round(d.current.temperature_2m)+'°C · '+desc(d.current.weather_code);$('weatherDetail').textContent='Hissedilen '+Math.round(d.current.apparent_temperature)+'°C · Güncelleme '+d.current.time.slice(11,16)}catch{if(run===weatherRun){$('weatherValue').textContent='Hava durumu alınamadı';$('weatherDetail').textContent='Biraz sonra tekrar dene.'}}}
+  $('weatherCity').addEventListener('change',()=>{try{localStorage.setItem('cevre-weather-city',$('weatherCity').value)}catch{}weather()});weather();setInterval(weather,900000);
+  let newsBusy=false;
+  async function news(){if(newsBusy)return;newsBusy=true;$('newsRefresh').disabled=true;try{const r=await fetch('/api/news',{signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error();const d=await r.json();if(!d.items?.length)throw Error();const list=$('dailyNews');list.replaceChildren();for(const item of d.items){let u;try{u=new URL(item.url)}catch{continue}if(u.protocol!=='https:'||u.hostname!=='www.trthaber.com')continue;const a=document.createElement('a');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title;list.append(a)}$('newsUpdated').textContent='TRT Haber · Alındı '+new Date(d.fetchedAt).toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}catch{$('dailyNews').textContent='Haberler şu anda alınamıyor.';$('newsUpdated').textContent='Yenile düğmesiyle tekrar dene.'}finally{newsBusy=false;$('newsRefresh').disabled=false}}
+  $('newsRefresh').addEventListener('click',news);news();setInterval(news,300000);
+})();
