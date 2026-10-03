@@ -38,13 +38,13 @@ async function loadData(){
  state.notices=follows.filter(f=>f.followed_id===myId).map(f=>user(f.follower_id).name+' seni takip ediyor.');
  if(chatUser===null||!users.some(u=>u.id===chatUser))chatUser=users[0]?.id||null;
 }
-function renderAccountBar(){ $('accountBar').innerHTML=session?'<button class="quiet" onclick="logout()">Çıkış yap</button>':'<button class="quiet" onclick="showAuth(\'login\')">Giriş yap</button><button class="primary" onclick="showAuth(\'signup\')">Hesap oluştur</button>';$('connectionBadge').textContent=db?'ÇEVRE':'KURULUM GEREKLİ'}
+function renderAccountBar(){ $('accountBar').innerHTML=session?'':'<button class="quiet" onclick="showAuth(\'login\')">Giriş yap</button><button class="primary" onclick="showAuth(\'signup\')">Hesap oluştur</button>';$('connectionBadge').textContent=db?'ÇEVRE':'KURULUM GEREKLİ'}
 function go(v){if(v==='profile'&&!requireLogin())return;view=v;query='';$('search').value='';render();window.scrollTo(0,0)}
 function suggestions(){ $('suggestions').innerHTML=users.length?users.slice(0,5).map(u=>'<div class="suggestion">'+avatar(u)+'<div><div class="name">'+esc(u.name)+'</div><small>@'+u.handle+'</small></div><button class="secondary" onclick="follow('+u.id+')">'+(state.following.includes(u.id)?'Takiptesin':'Takip et')+'</button></div>').join(''):'<p class="muted">'+(session?'Yeni üyeler burada görünecek.':'Üyeleri görmek için giriş yap.')+'</p>' }
 function render(){
  clearInterval(chatTimer);chatTimer=null;renderAccountBar();
  $('nav').innerHTML=[['home','Ana sayfa'],['explore','Keşfet'],['messages','Mesajlar'],['notifications','Bildirimler'],['saved','Kaydedilenler'],['profile','Profilim']].map(([id,label])=>'<button class="'+(view===id?'active':'')+'" onclick="go(\''+id+'\')">'+icon(id)+'<span class="label">'+label+'</span></button>').join('');
- $('bell').innerHTML=icon('notifications');$('sideName').textContent=state.name;$('sideHandle').textContent=myId?'@uye'+myId:'Misafir';const a=avatar(user(0));$('headerAvatar').innerHTML=a.slice(a.indexOf('>')+1,-6);$('sideAvatar').innerHTML=$('headerAvatar').innerHTML;suggestions();
+ $('sideName').textContent=state.name;$('sideHandle').textContent=myId?'@uye'+myId:'Misafir';const a=avatar(user(0));$('sideAvatar').innerHTML=a.slice(a.indexOf('>')+1,-6);suggestions();
  const m=$('main');
  if(!session){m.innerHTML='<div class="card pad"><h1>Çevre’ye hoş geldin</h1><p>Paylaş, insanlarla tanış ve sohbet et.</p>'+(db?'':'<p class="authintro">Site henüz veritabanına bağlanmadı. Kurulum tamamlandığında üyelik açılacak.</p>')+'<div class="row"><button class="primary" onclick="showAuth(\'signup\')">Hesap oluştur</button><button class="secondary" onclick="showAuth(\'login\')">Giriş yap</button></div></div>';return}
  if(view==='messages'){renderChat();return}
