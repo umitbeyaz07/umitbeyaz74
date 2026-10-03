@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#102f3e"/><stop offset=".52" stop-color="#396f74"/><stop offset="1" stop-color="#0a3038"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#c9e3d9" stop-opacity=".42"/><stop offset=".55" stop-color="#92c5be" stop-opacity=".13"/><stop offset="1" stop-color="#b7dfd5" stop-opacity="0"/></radialGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#4d8484"/><stop offset=".4" stop-color="#234e58"/><stop offset="1" stop-color="#09232e"/></linearGradient>
+ <linearGradient id="mist" x2="0" y2="1"><stop stop-color="#bdd6d0" stop-opacity="0"/><stop offset=".5" stop-color="#bdd6d0" stop-opacity=".26"/><stop offset="1" stop-color="#bdd6d0" stop-opacity="0"/></linearGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="35"/></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+ <g id="tree"><path d="M0 0-30 75-19 75-43 110-28 110-60 155-11 150-11 190H11V150L60 155 28 110 43 110 19 75 30 75Z"/></g>
+</defs>
+<path fill="url(#sky)" d="M0 0h1920v1200H0z"/>
+<ellipse cx="1410" cy="180" rx="550" ry="380" fill="url(#light)"/>
+<g filter="url(#blur)" opacity=".45" fill="#153e4b"><path d="M-60 295q250-130 580-30t520 10 630-50 350 110v180H-60Z"/></g>
+<path fill="#2f6069" opacity=".7" d="M0 510 200 390 405 450 610 280 805 410 1030 355 1210 455 1470 330 1660 445 1920 375v360H0Z"/>
+<path fill="#214e59" d="M0 630 235 465 470 545 685 455 865 615 1080 530 1300 580 1510 450 1740 525 1920 475v345H0Z"/>
+<g fill="#123f4a" filter="url(#soft)" opacity=".75">
+<use href="#tree" transform="translate(40 525) scale(1.1)"/><use href="#tree" transform="translate(150 555) scale(.9)"/><use href="#tree" transform="translate(235 515) scale(1.4)"/><use href="#tree" transform="translate(335 550) scale(1.1)"/><use href="#tree" transform="translate(430 575) scale(.9)"/><use href="#tree" transform="translate(1470 565) scale(1.1)"/><use href="#tree" transform="translate(1570 505) scale(1.5)"/><use href="#tree" transform="translate(1690 555) scale(1.1)"/><use href="#tree" transform="translate(1810 490) scale(1.6)"/><use href="#tree" transform="translate(1920 550) scale(1.2)"/>
+</g>
+<path fill="url(#water)" d="M0 740q490-20 960 0t960-5v465H0Z"/>
+<ellipse cx="1330" cy="800" rx="550" ry="75" fill="url(#light)"/>
+<g fill="url(#mist)" filter="url(#blur)"><ellipse cx="950" cy="625" rx="1160" ry="140"/><ellipse cx="1250" cy="750" rx="1050" ry="100"/></g>
+<g fill="none" stroke="#a7d9cd" stroke-opacity=".09" stroke-width="2"><path d="M850 810h700M1120 846h600M440 892h600M1230 945h410M300 997h670M780 1065h710M250 1130h640"/></g>
+<path fill="#091f2b" opacity=".72" d="M0 890q170-30 360 100t120 210H0ZM1920 905q-190 0-350 95t-140 200h490Z"/>
+<g fill="#0a2932" opacity=".8"><use href="#tree" transform="translate(-5 650) scale(2.7)"/><use href="#tree" transform="translate(175 825) scale(1.7)"/><use href="#tree" transform="translate(1880 700) scale(2.9)"/></g>
+<path fill="#061e2a" opacity=".18" d="M0 0h1920v1200H0z"/>
+</svg>
