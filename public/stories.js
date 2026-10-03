@@ -19,6 +19,6 @@ function closeStatus(){$('statusDialog').close();$('statusContent').innerHTML=''
 async function deleteStatus(id){const s=statusRows.find(x=>x.id===id);if(!s||s.author_id!==myId||busy)return;busy=true;try{const rows=checked(await db.from('statuses').delete().eq('id',id).eq('author_id',myId).select('id'));if(!rows.length)throw new Error('Durum silinemedi.');closeStatus();if(s.image_path)await db.storage.from('cevre-status').remove([s.image_path]);statusRows=statusRows.filter(x=>x.id!==id);renderStatusStrip();toast('Durum silindi')}catch(e){fail(e)}finally{busy=false}}
 const oldResetSocial=resetSocial;
 resetSocial=function(){oldResetSocial();statusMode=false;statusRows=[];statusLoading=false;statusLoadedAt=0;statusRequest++;statusGroup=[];closeStatus()};
-document.addEventListener('play',e=>{if(e.target.tagName==='AUDIO'||e.target.tagName==='VIDEO')document.querySelectorAll('audio,video').forEach(el=>{if(el!==e.target)el.pause()})},true);
+document.addEventListener('play',e=>{if((e.target.tagName==='AUDIO'||e.target.tagName==='VIDEO')&&!e.target.closest('.call-stage'))document.querySelectorAll('audio,video').forEach(el=>{if(el!==e.target&&!el.closest('.call-stage'))el.pause()})},true);
 setInterval(()=>{if(!session)return;renderStatusStrip();if($('statusDialog').open&&Date.parse(statusGroup[statusIndex]?.expires_at||0)<=Date.now())closeStatus();if(!document.hidden&&Date.now()-statusLoadedAt>60000)loadStatuses()},15000);
 window.cevreReady.then(()=>{if(session)render()});
