@@ -1,0 +1,17 @@
+/* Mesaj sayacı bildirimlerin okunma durumundan bağımsızdır. */
+let unreadBySender=new Map(),messageBadgeGeneration=0,messageCountBusy=false,messageCountLoaded=0,messageReads=new Map(),messageReadBusy=new Set();
+function messageUnreadTotal(){return [...unreadBySender.values()].reduce((sum,n)=>sum+n,0)}
+function paintMessageBadge(){const button=document.querySelector('[data-nav="messages"]'),count=messageUnreadTotal();if(button){button.querySelector('.message-count')?.remove();if(count>0)button.insertAdjacentHTML('beforeend','<span class="notification-count message-count" aria-label="'+count+' okunmamış mesaj">'+count+'</span>');button.setAttribute('aria-label',count?'Mesajlar, '+count+' okunmamış':'Mesajlar')}document.querySelectorAll('.contact').forEach((el,i)=>{el.querySelector('.contact-message-count')?.remove();const n=unreadBySender.get(users[i]?.id)||0;if(n)el.insertAdjacentHTML('beforeend','<span class="contact-message-count" aria-label="'+n+' okunmamış mesaj">'+n+'</span>')})}
+async function fetchMessageCounts(force=false){if(!session||!myId||!db?.rpc||messageCountBusy||document.hidden)return;if(!force&&Date.now()-messageCountLoaded<8000)return;messageCountBusy=true;const gen=messageBadgeGeneration;try{const rows=checked(await db.rpc('cevre_unread_messages'));const missing=rows.map(r=>r.sender_id).filter(id=>!users.some(u=>u.id===id)&&id!==myId);if(missing.length){const profiles=checked(await db.from('profiles').select(profileColumns).in('id',missing));if(gen!==messageBadgeGeneration)return;for(const p of profiles){if(!allProfiles.some(x=>x.id===p.id))allProfiles.push(p);if(!users.some(x=>x.id===p.id))users.push(profileUser(p))}}if(gen!==messageBadgeGeneration)return;unreadBySender=new Map(rows.map(r=>[r.sender_id,Number(r.unread_count)]));messageCountLoaded=Date.now();paintMessageBadge()}catch(e){if(gen===messageBadgeGeneration){messageCountLoaded=Date.now();console.error('Mesaj sayacı:',e)}}finally{if(gen===messageBadgeGeneration)messageCountBusy=false}}
+async function markShownMessages(id){if(!session||view!=='messages'||chatUser!==id||document.hidden||!$('bubbles')||messageReadBusy.has(id))return;const received=(state.messages[id]||[]).filter(m=>!m.me&&m.id);const through=Math.max(0,...received.map(m=>m.id));if(!through||through<=(messageReads.get(id)||0))return;const gen=messageBadgeGeneration;messageReadBusy.add(id);try{checked(await db.rpc('cevre_read_messages',{p_sender:id,p_through:through}));if(gen!==messageBadgeGeneration)return;messageReads.set(id,through);await fetchMessageCounts(true)}catch(e){console.error('Mesaj okundu:',e)}finally{if(gen===messageBadgeGeneration)messageReadBusy.delete(id)}}
+const messageBubbleDraw=drawBubbles;
+drawBubbles=function(id){messageBubbleDraw(id);markShownMessages(id)};
+const messageBadgeRender=render;
+render=function(){messageBadgeRender();paintMessageBadge();fetchMessageCounts()};
+const messageBadgeChat=renderChat;
+renderChat=function(){messageBadgeChat();paintMessageBadge()};
+const messageBadgeReset=resetSocial;
+resetSocial=function(){messageBadgeGeneration++;unreadBySender.clear();messageReads.clear();messageReadBusy.clear();messageCountBusy=false;messageCountLoaded=0;messageBadgeReset()};
+setInterval(()=>fetchMessageCounts(),8000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(view==='messages')markShownMessages(chatUser);fetchMessageCounts(true)}});
+window.cevreReady.then(()=>fetchMessageCounts(true));
