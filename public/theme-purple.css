@@ -15,3 +15,5 @@ dialog{background:linear-gradient(135deg,#512466ed,#1c0b39f5);color:#f7ecff;bord
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,.username-edit:focus-visible,.crop-stage:focus-visible{outline-color:#e1b7ff}.crop-zoom input,input[type=range]{accent-color:#d1a4ff}::-webkit-scrollbar-thumb{background:#a87bd77d}.rain-drop{background:linear-gradient(transparent,#e9cdff);box-shadow:0 0 4px #c996ff45}
 @supports not (backdrop-filter:blur(1px)){.card,.people-card,.side{background:#271141}dialog{background:#28113f}header{background:#1c0d35}}
 @media(max-width:780px){header{background:#1d0d38ed}.side{background:#1b0c33f2;border-color:#d4a9ff69;box-shadow:0 -5px 25px #09001d8c}.card{border-radius:24px}.cover{border-radius:23px 23px 0 0}body{background-attachment:scroll}}
+
+.logo>span:first-child{background:none;border:0;box-shadow:none}.logo>span:first-child img{display:block;width:39px;height:39px}
