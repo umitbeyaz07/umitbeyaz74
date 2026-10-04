@@ -22,3 +22,24 @@ dialog{color:#192c46;background:linear-gradient(135deg,#e0e8f0df,#adbdd4e8);bord
  .side #nav button svg{width:22px;height:22px;flex-shrink:0}
  .side #nav .notification-count{display:block;top:0;right:calc(50% - 22px);min-width:18px;height:18px;line-height:18px;background:#df3547;color:#fff;font-size:10px;z-index:1}
 }
+
+/* Tema ile uyumlu yumuşak, hareketli arka plan. */
+body{isolation:isolate}
+.cevre-ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:linear-gradient(135deg,#a2aec3,#c5d1df 55%,#acbad0)}
+.ambient-glow{position:absolute;width:85vmax;height:85vmax;border-radius:50%;opacity:.75;will-change:transform;animation:cevre-ambient-drift 26s ease-in-out infinite alternate}
+.ambient-glow-0{left:-35vmax;top:-35vmax;background:radial-gradient(circle,#e8f6ffb0,transparent 65%)}
+.ambient-glow-1{right:-40vmax;top:5vh;background:radial-gradient(circle,#7f9dc080,transparent 65%);animation-duration:34s;animation-delay:-13s;animation-direction:alternate-reverse}
+.ambient-glow-2{left:-10vmax;bottom:-55vmax;background:radial-gradient(circle,#c5c4e6a0,transparent 65%);animation-duration:30s;animation-delay:-8s}
+@keyframes cevre-ambient-drift{from{transform:translate3d(-3%,0,0) scale(.95)}to{transform:translate3d(12%,14%,0) scale(1.12)}}
+.ambient-paused .ambient-glow{animation-play-state:paused}
+@media(max-width:780px){.ambient-glow{width:100vmax;height:100vmax;opacity:.6}.ambient-glow-2{display:none}}
+@media(prefers-reduced-motion:reduce){.ambient-glow{animation:none;will-change:auto}}
+
+/* Cam üzerindeki ışığı yansıtan su damlaları. */
+.cevre-water{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.cevre-water-drop{position:absolute;top:-35px;width:var(--drop-size);height:calc(var(--drop-size)*1.45);border-radius:48% 48% 52% 52% / 62% 62% 38% 38%;border:1px solid #effaff85;background:radial-gradient(ellipse at 28% 22%,#ffffffc0 0%,#ffffff30 20%,#b8d7ed12 48%,#6686a329 75%,#edfaff70 100%);box-shadow:inset 1px 2px 3px #ffffffb0,inset -1px -2px 3px #526c9850,1px 3px 4px #425e762b;animation:cevre-water-slide var(--drop-time) linear var(--drop-delay) infinite;opacity:.75}
+.cevre-water-drop::after{content:'';position:absolute;left:35%;bottom:100%;width:2px;height:25px;background:linear-gradient(transparent,#ffffff30);border-radius:100%}
+@keyframes cevre-water-slide{0%{transform:translate3d(0,0,0);opacity:0}8%{opacity:.75}90%{opacity:.65}100%{transform:translate3d(var(--drop-drift),calc(100vh + 70px),0);opacity:0}}
+.ambient-paused .cevre-water-drop{animation-play-state:paused}
+@media(max-width:780px){.cevre-water-drop:nth-child(n+13){display:none}}
+@media(prefers-reduced-motion:reduce){.cevre-water-drop{animation:none;top:calc(15% + var(--drop-size)*8);opacity:.5}}

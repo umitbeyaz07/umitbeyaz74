@@ -1,8 +1,20 @@
-/* Dekoratif yağmur: arka planda, tıklamalara kapalı ve hareket tercihine duyarlı. */
+/* Çevre: hafif, dekoratif ve etkileşimleri engellemeyen hareketli ışıklar. */
 (()=>{
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)'),mobile=window.matchMedia('(max-width: 780px)');
- const layer=document.createElement('div');layer.className='rain-layer';layer.setAttribute('aria-hidden','true');document.body.prepend(layer);
- function build(){layer.replaceChildren();if(reduced.matches)return;const count=mobile.matches?28:62,fragment=document.createDocumentFragment();for(let i=0;i<count;i++){const drop=document.createElement('span');drop.className='rain-drop';drop.style.left=(Math.random()*116)+'%';drop.style.setProperty('--rain-length',(22+Math.random()*48)+'px');drop.style.setProperty('--rain-duration',(1.6+Math.random()*1.8)+'s');drop.style.setProperty('--rain-delay',(-Math.random()*5)+'s');drop.style.setProperty('--rain-opacity',String(.2+Math.random()*.38));fragment.append(drop)}layer.append(fragment);pause()}
- function pause(){layer.classList.toggle('rain-paused',document.hidden)}
- reduced.addEventListener('change',build);mobile.addEventListener('change',build);document.addEventListener('visibilitychange',pause);build();
+ const layer=document.createElement('div');
+ layer.className='cevre-ambient';layer.setAttribute('aria-hidden','true');
+ for(let i=0;i<3;i++){const glow=document.createElement('span');glow.className='ambient-glow ambient-glow-'+i;layer.append(glow)}
+ const water=document.createElement('div');water.className='cevre-water';
+ for(let i=0;i<24;i++){
+  const drop=document.createElement('span');drop.className='cevre-water-drop';
+  drop.style.left=((i*37+13)%100)+'%';
+  drop.style.setProperty('--drop-size',(7+(i*7)%17)+'px');
+  drop.style.setProperty('--drop-time',(17+(i*11)%24)+'s');
+  drop.style.setProperty('--drop-delay',(-((i*13)%41))+'s');
+  drop.style.setProperty('--drop-drift',((i%2?1:-1)*(8+i%15))+'px');
+  water.append(drop);
+ }
+ layer.append(water);
+ document.body.prepend(layer);
+ function pause(){layer.classList.toggle('ambient-paused',document.hidden)}
+ document.addEventListener('visibilitychange',pause);pause();
 })();
