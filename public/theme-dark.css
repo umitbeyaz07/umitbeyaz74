@@ -1,0 +1,29 @@
+/* Sağ üstte kalıcı tema kontrolü. */
+#themeToggle{display:grid;place-items:center;flex-shrink:0;width:42px;height:42px;padding:0;font-size:26px;border-radius:50%;cursor:pointer}
+#themeToggle:focus-visible{outline:3px solid #4287c5;outline-offset:3px}
+.headend{margin-left:auto}
+html[data-theme="dark"]{color-scheme:dark;--ink:#edf3fc;--muted:#bdcadd;--line:#ffffff26;--surface:#202e40;--bg:#111c2b;--soft:#ffffff12;--glass-shadow:inset 1px 1px 2px #ffffff16,0 7px 20px #00000035}
+html[data-theme="dark"] body{background:#111c2b;color:#edf3fc}
+html[data-theme="dark"] .cevre-ambient{background:linear-gradient(135deg,#101b2b,#243448 55%,#17243a)}
+html[data-theme="dark"] .ambient-glow{opacity:.15}
+html[data-theme="dark"] header,html[data-theme="dark"] .side{background:#182638e8;border-color:#ffffff26}
+html[data-theme="dark"] :is(.card,.people-card,.daily-panel,.purplecard,.status-strip,.member-strip,.chatlayout,.contacts,.chatheader,.chat #chatForm,.chat-media-toolbar,.stats,.grid-tile){background:#203047b8;color:#edf3fc;border-color:#ffffff24}
+html[data-theme="dark"] :is(.name,.person-link .name,.people-card h3,.right h2,.profile-name,.posthead .name,.contact .name,.chatheader .name,.daily-weather label){color:#edf3fc!important}
+html[data-theme="dark"] :is(h1,h2,h3,.logo,.posttext,.comment-copy p,.profile-bio,.grid-text,.compose-text,dialog label,.stats b,.daily-clock,.daily-weather strong,.quick-person,.notification-item,.comment-name){color:#edf3fc}
+html[data-theme="dark"] :is(small,.muted,.profile-handle,.profile-joined,.eyebrow,.greeting,.daily-date,.people-card p,.side .demoinfo,.footer,.quick-person small,.daily-news a,.daily-weather a,.notification-item small,.typing-indicator,.presence-label){color:#bac9dc}
+html[data-theme="dark"] :is(.field,.search input,.composer-prompt,.commentbox input,.field option,.compose-text){background:#152337;color:#edf3fc;border-color:#ffffff30}
+html[data-theme="dark"] :is(input,textarea)::placeholder{color:#b2c1d4}
+html[data-theme="dark"] :is(.primary,.secondary,.side nav button,.quiet,.iconbtn,.tabs button,.postactions button,.composer-tools button:not(.primary),.view-switch,.reaction-chip,.reaction-picker summary){background:#2c405b;color:#edf3fc;border-color:#ffffff30}
+html[data-theme="dark"] :is(.side nav button.active,.contact.selected,.reaction-chip.selected){background:#3a5678;color:#fff}
+html[data-theme="dark"] .side nav button.active svg{stroke:#fff}
+html[data-theme="dark"] :is(.tabs button.active,.profile-content-header .tabs button.active){color:#fff;border-color:#90b9ee}
+html[data-theme="dark"] .bubble{background:#2c4059;color:#edf3fc;border-color:#ffffff26}
+html[data-theme="dark"] .bubble.me{background:#385d85;color:#fff}
+html[data-theme="dark"] :is(dialog,.toast,.post-menu .menu-panel,.reaction-options){background:#203149;color:#edf3fc;border-color:#ffffff35}
+html[data-theme="dark"] .post-menu .menu-panel button{color:#edf3fc}
+html[data-theme="dark"] .notification-item.unread{background:#35547670}
+html[data-theme="dark"] .logo>span:first-child img{filter:grayscale(1) brightness(1.6)}
+html[data-theme="dark"] .presence-label.online{color:#83dfb1}
+html[data-theme="dark"] .postactions .liked{color:#ff819e}
+html[data-theme="dark"] .notification-count,html[data-theme="dark"] .contact-message-count{background:#df3547;color:#fff}
+@media(max-width:780px){#themeToggle{width:38px;height:38px}.headend{gap:6px}}
