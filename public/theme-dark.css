@@ -55,3 +55,5 @@ html[data-theme="dark"] .color-options button[aria-pressed="true"]{border-color:
 @media(max-width:780px){.color-picker summary{width:36px;height:36px}.color-options{right:-42px}}
 
 .personal-message-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.personal-message-actions button{background:transparent;color:inherit;border:1px solid currentColor;border-radius:12px;padding:7px 9px;font-size:11px;min-height:32px}.personal-message-actions button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+.chat-media-toolbar{flex-wrap:wrap}.chat-file-link{display:block;padding:12px;border:1px solid currentColor;border-radius:12px;color:inherit;overflow-wrap:anywhere}.chat-attachment-preview>span{overflow-wrap:anywhere;min-width:0;padding:10px}
