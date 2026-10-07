@@ -40,7 +40,7 @@ drawBubbles=function(peer){
   const m=messages[i];if(!m?.id||bubble.querySelector('.personal-message-actions'))return;
   const area=document.createElement('div');area.className='personal-message-actions';
   const hide=document.createElement('button');hide.type='button';hide.textContent='Benden sil';hide.onclick=()=>hidePersonalMessage(m.id,peer);area.append(hide);
-  if(!m.me&&m.text){const copy=document.createElement('button');copy.type='button';copy.textContent='Kopyala';copy.onclick=()=>copyIncomingMessage(m.text);area.append(copy)}
+  if(m.text){const copy=document.createElement('button');copy.type='button';copy.textContent='Kopyala';copy.onclick=()=>copyIncomingMessage(m.text);area.append(copy)}
   bubble.append(area);
  });
 };
