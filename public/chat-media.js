@@ -19,7 +19,7 @@ function chooseChatFile(event){
  if(!['pdf','doc','docx','xls','xlsx','ppt','pptx','txt','csv','zip','rar','7z'].includes(ext)){toast('PDF, Office, TXT, CSV veya arşiv dosyası seç.');return}
  if(file.size>20971520){toast('Dosya en fazla 20 MB olabilir.');return}
  if(!file.size){toast('Boş dosya gönderilemez.');return}
- clearChatDraft();chatDraft={peer:chatUser,blob:file,kind:'file',mime:'application/octet-stream',ext,name:file.name};paintChatDraft();
+ clearChatDraft();chatDraft={peer:chatUser,blob:new Blob([file],{type:'application/octet-stream'}),kind:'file',mime:'application/octet-stream',ext,name:file.name};paintChatDraft();
 }
 const fileChatRender=renderChat;
 renderChat=function(){
