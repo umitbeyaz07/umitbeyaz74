@@ -16,7 +16,7 @@
  drawBubbles=function(peer){
   const box=$('bubbles');if(!box||view!=='messages'||chatUser!==peer)return;
   const rows=state.messages[peer]||[];
-  const signature=JSON.stringify([session?.user.id,peer,rows.map(m=>[m.id,m.text,m.media,m.me]),rows.map(m=>[m.id,messageReactions.get(m.id)||[]])]);
+  const signature=JSON.stringify([session?.user.id,peer,rows.map(m=>[m.id,m.text,m.media,m.me,m.readAt,m.replyTo]),rows.map(m=>[m.id,messageReactions.get(m.id)||[]])]);
   if(box.dataset.stableSignature===signature){markShownMessages(peer);return}
   const scroll=box.scrollTop,nearBottom=box.scrollHeight-scroll-box.clientHeight<80;
   previousDraw(peer);box.dataset.stableSignature=signature;

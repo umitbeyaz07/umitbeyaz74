@@ -1,0 +1,39 @@
+#battleToggle{position:relative;display:grid;place-items:center;flex-shrink:0;width:42px;height:42px;padding:3px;background:#c3c9bc;border:1px solid #89917c;border-radius:12px;cursor:pointer}
+#battleToggle svg{width:34px;height:34px}#battleToggle>span{position:absolute;right:-2px;bottom:-2px;background:#f2c343;color:#171d19;font-size:9px;font-weight:900;padding:1px 4px;border-radius:3px}
+#battleToggle[aria-pressed="true"]{border-color:#f2c343;box-shadow:0 0 0 2px #f2c34355}#battleToggle:focus-visible{outline:3px solid #edbe42;outline-offset:3px}
+html[data-battle="on"]{--accent:#d9ac33;--accent-light:#d7c785;--accent-mid:#887f48;--accent-dark:#494325;--glass-shadow:0 8px 20px #0004;--line:#b1b58a33}
+html[data-battle="on"] body{background:#191d18;color:#ecebdc}
+html[data-battle="on"][data-color] .cevre-ambient{background:repeating-linear-gradient(135deg,#ffffff03 0 1px,transparent 1px 7px),radial-gradient(ellipse at 80% 10%,#7a70473b,transparent 60%),linear-gradient(125deg,#151b18,#363a2c 55%,#1d241f)}
+html[data-battle="on"] .ambient-glow{opacity:.07}html[data-battle="on"] .cevre-water{opacity:.3}
+html[data-battle="on"] header,html[data-battle="on"] .side{background:#1c241eef;border-color:#8a927b55;border-radius:6px}
+html[data-battle="on"] :is(.card,.people-card,.daily-panel,.purplecard,.status-strip,.member-strip,.chatlayout,.contacts,.chatheader,.chat #chatForm,.chat-media-toolbar,.stats,.grid-tile){background:linear-gradient(130deg,#30392ce8,#222b24ed);border-color:#8a927b45;border-radius:8px;box-shadow:0 8px 22px #0003}
+html[data-battle="on"] :is(h1,h2,h3,.logo){letter-spacing:.04em;color:#eee8cf}
+html[data-battle="on"] .topline h1{border-left:4px solid #e7b939;padding-left:12px}
+html[data-battle="on"][data-color] .primary,html[data-battle="on"][data-color] .side nav button.active{background:#e1b63e;color:#192019;border-color:#f2d175;border-radius:5px;font-weight:800}
+html[data-battle="on"] .side nav button.active svg{stroke:#192019}
+html[data-battle="on"] :is(.secondary,.side nav button,.reaction-chip,.reaction-picker summary){background:#354132;color:#f0eedf;border-color:#87917766;border-radius:6px}
+html[data-battle="on"] :is(.field,.search input,.composer-prompt,.commentbox input,.compose-text,.field option){background:#19221c;color:#ecebdc;border-color:#77846c70;border-radius:5px}
+html[data-battle="on"][data-color] .cover{background:repeating-linear-gradient(125deg,#8c895018 0 25px,transparent 25px 55px),linear-gradient(115deg,#293b2c,#777348,#233326);border-radius:8px}
+html[data-battle="on"] .bubble{background:#354334;border-color:#899c7660;border-radius:10px}
+html[data-battle="on"][data-color] .bubble.me{background:#645a30;color:#fff8dc}
+html[data-battle="on"] :is(dialog,.toast,.reaction-options,.post-menu .menu-panel,.color-options){background:#263127;border-color:#9a9a6c70;border-radius:10px}
+html[data-battle="on"] .notification-item.unread{background:#bca43e20}
+@media(max-width:780px){#battleToggle{width:34px;height:34px}#battleToggle svg{width:29px;height:29px}.headend{gap:4px}html[data-battle="on"] .side{border-radius:12px 12px 0 0}header{gap:8px}}
+/* Sadece kask teması açıkken kullanılan savaş alanı manzarası. */
+html[data-battle="on"][data-color] .cevre-ambient{background:#17251e url('assets/battle-landscape.svg') center/cover no-repeat}
+html[data-battle="on"] .cevre-ambient::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0b171d80,transparent 65%),linear-gradient(0deg,#101b1ac0,transparent 55%);pointer-events:none}
+html[data-battle="on"] .cevre-water{display:none}
+html[data-battle="on"] .ambient-glow{z-index:1;opacity:.13;background:radial-gradient(ellipse,#d5dac870,transparent 60%);animation-duration:45s}
+html[data-battle="on"] .ambient-glow-1{background:radial-gradient(ellipse,#e0b84970,transparent 65%)}
+html[data-battle="on"] :is(.card,.people-card,.daily-panel,.chatlayout){background:linear-gradient(135deg,#2c352eee,#18251ded);border-top:2px solid #9c8b485c;box-shadow:0 10px 35px #0005,inset 0 1px #ffffff08}
+html[data-battle="on"] .posthead{border-bottom:1px solid #c8b16020}
+html[data-battle="on"] .avatar{border-color:#b2a15d;background:#3b4835;color:#f8edbc;box-shadow:0 0 0 2px #151f18}
+html[data-battle="on"] .status-circle{border-color:#d9b74d;box-shadow:0 0 0 3px #d9b74d20}
+html[data-battle="on"] .side nav button.active{box-shadow:0 3px 14px #d4a62625}
+html[data-battle="on"] .primary:hover{filter:brightness(1.1)}
+html[data-battle="on"] .daily-clock{color:#edc658;font-variant-numeric:tabular-nums}
+html[data-battle="on"] :is(.tabs button.active,.profile-content-header .tabs button.active){color:#efcf70;border-color:#efcf70}
+html[data-battle="on"] .postactions .liked{color:#f29a74}
+html[data-battle="on"] .profileavatar{border:3px solid #c4aa56}
+html[data-battle="on"] .cover{box-shadow:inset 0 -40px 60px #0c180c40}
+@media(max-width:780px){html[data-battle="on"][data-color] .cevre-ambient{background-position:72% center}html[data-battle="on"] .side{border-top:2px solid #b79b4c80}}
