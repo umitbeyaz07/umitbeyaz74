@@ -1,5 +1,6 @@
 (()=>{
  const root=document.documentElement;
+ delete root.dataset.battle;try{localStorage.removeItem('cevre-battle')}catch{}
  let saved;try{saved=localStorage.getItem('cevre-theme')}catch{}
  root.dataset.theme=saved==='dark'?'dark':'light';
  const colors=[['blue','Mavi'],['purple','Mor'],['green','Yeşil'],['pink','Pembe']];
